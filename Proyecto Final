@@ -1,0 +1,67 @@
+import random
+
+def seleccionar_palabra():
+    palabras = ["SCANIA", "HINO", "VOLVO", "DAEWOO", "MERCEDES BENZ", "DAF", "FAW", "CHEVROLET", "INTERNATIONAL", "MACK", "RENAULT", "IVECO", "FORD", "VOLKSWAGEN", "MAN", "KENWORTH", "FREIGHTINER"]
+    return random.choice(palabras)
+
+def mostrar_tablero(palabra_oculta, letras_adivinadas):
+    tablero = ""
+    for letra in palabra_oculta:
+        if letra in letras_adivinadas:
+            tablero += letra + " "
+        else:
+            tablero += "_ "
+    return tablero
+
+def mostrar_puntaje(puntos):
+    print("\nPuntaje actual: {}".format(puntos))
+
+def jugar_ahorcado():
+    print("BIENVENIDOS\nEste software fue desarrollado por Edwin Bermeo\nBienvenidos a jugar se ha dicho")
+
+    puntaje = 0
+    intentos_totales = 5
+
+    while True:
+        palabra_secreta = seleccionar_palabra()
+        letras_adivinadas = set()
+        letras_correctas = set(palabra_secreta)
+
+        print("\nComienza una nueva palabra:")
+        intentos_erroneos = 0
+
+        while True:
+            print("\nPalabra actual:", mostrar_tablero(palabra_secreta, letras_adivinadas))
+            letra_usuario = input("Ingresa una letra: ").upper()
+
+            if letra_usuario.isalpha() and len(letra_usuario) == 1:
+                if letra_usuario in letras_adivinadas:
+                    print("¡Ya adivinaste esa letra!")
+                elif letra_usuario in letras_correctas:
+                    print("¡Bien hecho! Has adivinado una letra.")
+                    letras_adivinadas.add(letra_usuario)
+                    puntaje += 10
+                else:
+                    print("¡Incorrecto! Sigue intentando.")
+                    intentos_erroneos += 1
+            else:
+                print("Ingresa una letra válida.")
+
+            mostrar_puntaje(puntaje)
+
+            if letras_correctas.issubset(letras_adivinadas):
+                print("\n¡Felicidades! Has adivinado la palabra:", palabra_secreta)
+                print("Eres excelente en camiones. Tu puntaje total es:", puntaje)
+                break
+
+            if intentos_erroneos == intentos_totales:
+                print("\n¡Oh no! Te has quedado sin intentos. La palabra era:", palabra_secreta)
+                print("Tu puntaje final es:", puntaje)
+                break
+
+        continuar = input("¿Quieres jugar otra vez? (s/n): ").lower()
+        if continuar != 's':
+            break
+
+if __name__ == "__main__":
+    jugar_ahorcado()
