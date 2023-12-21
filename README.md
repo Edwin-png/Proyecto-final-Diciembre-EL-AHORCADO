@@ -1,4 +1,4 @@
-Este programa implementa el clásico juego del ahorcado en Python. Permite a los jugadores adivinar una palabra oculta relacionada con camiones.
+Este programa implementa el clásico juego del ahorcado en Python, permite a los jugadores adivinar una palabra oculta relacionada con marcas de camiones.
 Cada letra correcta adivinada suma puntos al puntaje total del jugador. 
 El juego tiene un límite de 5 intentos erróneos y muestra un mensaje final si el jugador logra adivinar la palabra.
 
